@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+MSFS 2020 Audio Device Definition
+Defines custom audio device for aircraft model
+-->
+
+<ModelInfo>
+    <!-- Audio Device Component -->
+    <Component ID="AUDIO_DEVICE" Enabled="True">
+        <Description>External Audio System Controller</Description>
+        
+        <!-- Audio Device Parameters -->
+        <Parameter Name="DeviceType" Value="AUDIO_CUSTOM"/>
+        <Parameter Name="FolderPath" Value="C:\Music\MSFS_Audio"/>
+        <Parameter Name="MaxVolume" Value="1.0"/>
+        <Parameter Name="MinVolume" Value="0.0"/>
+        <Parameter Name="VolumeStep" Value="0.05"/>
+    </Component>
+    
+    <!-- Audio System Variables -->
+    <SimVars>
+        <!-- Master Volume Control -->
+        <Variable Name="AUDIO_VOLUME" 
+                  Type="FLOAT32" 
+                  Min="0.0" 
+                  Max="1.0" 
+                  Units="percentage"
+                  Interpolate="YES"
+                  Description="Master audio volume (0.0 = silent, 1.0 = maximum)"/>
+        
+        <!-- Play Control -->
+        <Variable Name="AUDIO_PLAY" 
+                  Type="BOOL" 
+                  Units="bool"
+                  Description="Play current track (1 = play, 0 = no action)"/>
+        
+        <!-- Stop Control -->
+        <Variable Name="AUDIO_STOP" 
+                  Type="BOOL" 
+                  Units="bool"
+                  Description="Stop playback (1 = stop, 0 = no action)"/>
+        
+        <!-- Next Track -->
+        <Variable Name="AUDIO_NEXT" 
+                  Type="BOOL" 
+                  Units="bool"
+                  Description="Play next track (1 = next, 0 = no action)"/>
+        
+        <!-- Previous Track -->
+        <Variable Name="AUDIO_PREVIOUS" 
+                  Type="BOOL" 
+                  Units="bool"
+                  Description="Play previous track (1 = previous, 0 = no action)"/>
+        
+        <!-- Current Track Display -->
+        <Variable Name="AUDIO_CURRENT_TRACK" 
+                  Type="STRING32" 
+                  Description="Currently playing track filename"/>
+        
+        <!-- Track Count -->
+        <Variable Name="AUDIO_TRACK_COUNT" 
+                  Type="INT32" 
+                  Units="number"
+                  Description="Total number of tracks in folder"/>
+        
+        <!-- Playback Status -->
+        <Variable Name="AUDIO_IS_PLAYING" 
+                  Type="BOOL" 
+                  Units="bool"
+                  Description="Indicates if audio is currently playing"/>
+        
+        <!-- Track Index -->
+        <Variable Name="AUDIO_TRACK_INDEX" 
+                  Type="INT32" 
+                  Units="number"
+                  Description="Current track index in playlist"/>
+    </SimVars>
+</ModelInfo>

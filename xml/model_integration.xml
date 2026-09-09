@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+MSFS 2020 Aircraft Model Integration
+Add this section to your aircraft's model.xml file
+-->
+
+<ModelInfo>
+    <!-- Include Audio Device Definition -->
+    <Include Path="audio_device.xml"/>
+    
+    <!-- Audio System Animation and Events -->
+    <Animation Name="AUDIO_SYSTEM">
+        <Params ID="0">
+            <Param Name="VolumeUp" Value="AUDIO_VOLUME" Min="0" Max="1" Type="Relative"/>
+            <Param Name="VolumeDown" Value="AUDIO_VOLUME" Min="0" Max="1" Type="Relative"/>
+        </Params>
+    </Animation>
+    
+    <!-- Cockpit Events for Audio Control -->
+    <CockpitEvents>
+        <!-- Volume Control Events -->
+        <Event Name="AUDIO_VOLUME_UP">
+            <Action Type="SimVar">
+                <Var Name="AUDIO_VOLUME" Value="+0.05"/>
+            </Action>
+            <Sound ID="AUDIO_BUTTON_CLICK"/>
+        </Event>
+        
+        <Event Name="AUDIO_VOLUME_DOWN">
+            <Action Type="SimVar">
+                <Var Name="AUDIO_VOLUME" Value="-0.05"/>
+            </Action>
+            <Sound ID="AUDIO_BUTTON_CLICK"/>
+        </Event>
+        
+        <!-- Playback Control Events -->
+        <Event Name="AUDIO_PLAY_PRESSED">
+            <Action Type="SimVar">
+                <Var Name="AUDIO_PLAY" Value="1"/>
+            </Action>
+            <ResetVar Name="AUDIO_PLAY" Delay="500ms"/>
+        </Event>
+        
+        <Event Name="AUDIO_STOP_PRESSED">
+            <Action Type="SimVar">
+                <Var Name="AUDIO_STOP" Value="1"/>
+            </Action>
+            <ResetVar Name="AUDIO_STOP" Delay="500ms"/>
+        </Event>
+        
+        <!-- Track Navigation Events -->
+        <Event Name="AUDIO_NEXT_PRESSED">
+            <Action Type="SimVar">
+                <Var Name="AUDIO_NEXT" Value="1"/>
+            </Action>
+            <ResetVar Name="AUDIO_NEXT" Delay="500ms"/>
+        </Event>
+        
+        <Event Name="AUDIO_PREVIOUS_PRESSED">
+            <Action Type="SimVar">
+                <Var Name="AUDIO_PREVIOUS" Value="1"/>
+            </Action>
+            <ResetVar Name="AUDIO_PREVIOUS" Delay="500ms"/>
+        </Event>
+    </CockpitEvents>
+    
+    <!-- LED/Display Updates -->
+    <Displays>
+        <Display Name="AUDIO_STATUS" Type="Text">
+            <Content>
+                <Line 1>Track: $(AUDIO_CURRENT_TRACK)</Line>
+                <Line 2>Volume: $(AUDIO_VOLUME*100)%</Line>
+                <Line 3>Status: $(AUDIO_IS_PLAYING ? 'Playing' : 'Stopped')</Line>
+            </Content>
+        </Display>
+        
+        <Display Name="AUDIO_TRACK_INFO" Type="Gauge">
+            <Content>
+                <Item Name="CurrentTrack" Format="$(AUDIO_TRACK_INDEX+1)/$(AUDIO_TRACK_COUNT)"/>
+                <Item Name="Volume" Format="$(AUDIO_VOLUME*100:3.0)%"/>
+            </Content>
+        </Display>
+    </Displays>
+</ModelInfo>

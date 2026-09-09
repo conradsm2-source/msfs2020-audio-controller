@@ -1,0 +1,10 @@
+{
+  "mp3_folder_path": "C:\\Music\\MSFS_Audio",
+  "simconnect_config": "SimConnect.cfg",
+  "simconnect_timeout_ms": 5000,
+  "polling_interval_ms": 100,
+  "volume_step": 0.05,
+  "supported_formats": ["mp3", "wav", "flac"],
+  "debug_mode": false,
+  "log_file": "logs/audio_controller.log"
+}

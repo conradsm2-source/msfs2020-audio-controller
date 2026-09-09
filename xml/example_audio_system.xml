@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Example: Complete Audio System Integration
+This shows how to fully integrate the audio system into an aircraft model
+-->
+
+<ModelInfo>
+    <Documentation>
+        <Description>Complete example of audio system integration in MSFS 2020 aircraft</Description>
+        <Author>Audio Controller Team</Author>
+        <Date>2024</Date>
+    </Documentation>
+    
+    <!-- Configuration Section -->
+    <AudioSystemConfig>
+        <ExternalFolder>C:\Music\MSFS_Audio</ExternalFolder>
+        <EnableVolumeControl>True</EnableVolumeControl>
+        <EnableTrackNavigation>True</EnableTrackNavigation>
+        <DefaultVolume>0.5</DefaultVolume>
+        <AutoLoadPlaylist>True</AutoLoadPlaylist>
+    </AudioSystemConfig>
+    
+    <!-- Cockpit Panel Integration -->
+    <PanelIntegration>
+        <Panel Name="AUDIO_CONTROL_PANEL" Position="500, 200">
+            <Label>AUDIO SYSTEM</Label>
+            
+            <!-- Volume Knob -->
+            <Control Type="Knob" Name="VOLUME_KNOB">
+                <Param Name="Variable" Value="AUDIO_VOLUME"/>
+                <Param Name="MinValue" Value="0.0"/>
+                <Param Name="MaxValue" Value="1.0"/>
+                <Param Name="Step" Value="0.05"/>
+                <Param Name="Indicator" Value="Show current volume"/>
+            </Control>
+            
+            <!-- Play Button -->
+            <Control Type="Button" Name="PLAY_BTN">
+                <Param Name="Label" Value="▶ PLAY"/>
+                <Param Name="OnClick" Value="AUDIO_PLAY_PRESSED"/>
+                <Param Name="Feedback" Value="Visual + Audio"/>
+            </Control>
+            
+            <!-- Stop Button -->
+            <Control Type="Button" Name="STOP_BTN">
+                <Param Name="Label" Value="⏹ STOP"/>
+                <Param Name="OnClick" Value="AUDIO_STOP_PRESSED"/>
+                <Param Name="Feedback" Value="Visual + Audio"/>
+            </Control>
+            
+            <!-- Previous Button -->
+            <Control Type="Button" Name="PREV_BTN">
+                <Param Name="Label" Value="⏮ PREV"/>
+                <Param Name="OnClick" Value="AUDIO_PREVIOUS_PRESSED"/>
+                <Param Name="Feedback" Value="Visual + Audio"/>
+            </Control>
+            
+            <!-- Next Button -->
+            <Control Type="Button" Name="NEXT_BTN">
+                <Param Name="Label" Value="⏭ NEXT"/>
+                <Param Name="OnClick" Value="AUDIO_NEXT_PRESSED"/>
+                <Param Name="Feedback" Value="Visual + Audio"/>
+            </Control>
+            
+            <!-- Current Track Display -->
+            <Display Type="TextBox" Name="TRACK_DISPLAY">
+                <Param Name="Content" Value="$(AUDIO_CURRENT_TRACK)"/>
+                <Param Name="ReadOnly" Value="True"/>
+                <Param Name="Font" Value="Arial"/>
+                <Param Name="FontSize" Value="12"/>
+            </Display>
+            
+            <!-- Track Count Display -->
+            <Display Type="TextBox" Name="TRACK_COUNT_DISPLAY">
+                <Param Name="Content" Value="$(AUDIO_TRACK_INDEX+1) / $(AUDIO_TRACK_COUNT)"/>
+                <Param Name="ReadOnly" Value="True"/>
+                <Param Name="Font" Value="Arial"/>
+                <Param Name="FontSize" Value="10"/>
+            </Display>
+            
+            <!-- Volume Display -->
+            <Display Type="Gauge" Name="VOLUME_DISPLAY">
+                <Param Name="Variable" Value="AUDIO_VOLUME"/>
+                <Param Name="MinValue" Value="0.0"/>
+                <Param Name="MaxValue" Value="1.0"/>
+                <Param Name="Label" Value="VOL"/>
+                <Param Name="Unit" Value="%"/>
+            </Display>
+            
+            <!-- Status Indicator LED -->
+            <Display Type="LED" Name="PLAYING_INDICATOR">
+                <Param Name="Variable" Value="AUDIO_IS_PLAYING"/>
+                <Param Name="OnColor" Value="0x00FF00"/>
+                <Param Name="OffColor" Value="0x333333"/>
+                <Param Name="Label" Value="PLAYING"/>
+            </Display>
+        </Panel>
+    </PanelIntegration>
+    
+    <!-- Keyboard Shortcuts -->
+    <KeyboardShortcuts>
+        <Shortcut Key="Ctrl+Alt+P" Action="AUDIO_PLAY_PRESSED" Description="Play audio"/>
+        <Shortcut Key="Ctrl+Alt+S" Action="AUDIO_STOP_PRESSED" Description="Stop audio"/>
+        <Shortcut Key="Ctrl+Alt+N" Action="AUDIO_NEXT_PRESSED" Description="Next track"/>
+        <Shortcut Key="Ctrl+Alt+B" Action="AUDIO_PREVIOUS_PRESSED" Description="Previous track"/>
+        <Shortcut Key="Ctrl+Alt+Up" Action="AUDIO_VOLUME_UP" Description="Increase volume"/>
+        <Shortcut Key="Ctrl+Alt+Down" Action="AUDIO_VOLUME_DOWN" Description="Decrease volume"/>
+    </KeyboardShortcuts>
+    
+    <!-- Event Log Configuration -->
+    <EventLogging>
+        <LogPlaybackEvents>True</LogPlaybackEvents>
+        <LogVolumeChanges>True</LogVolumeChanges>
+        <LogTrackChanges>True</LogTrackChanges>
+        <LogDirectory>Logs/Audio</LogDirectory>
+    </EventLogging>
+</ModelInfo>
